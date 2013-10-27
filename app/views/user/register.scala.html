@@ -1,0 +1,18 @@
+@main(Some("Register"), List("css/user/register.min.css")) {
+    <div class="container">
+        <div class="panel panel-default panel-register">
+            <div class="panel-heading">
+                <h2 class="panel-title">Set-up new account</h2>
+            </div>
+            <div class="panel-body">
+                <form>
+                    <input type="text" class="form-control" placeholder="Nickname" autofocus>
+                    <input type="text" class="form-control" placeholder="E-mail address">
+                    <input type="password" class="form-control" placeholder="Password">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Create account</button>
+                    <a href="@routes.User.login" class="btn btn-danger btn-block">Back to login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+}

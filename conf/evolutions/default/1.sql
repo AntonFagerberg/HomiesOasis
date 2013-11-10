@@ -1,0 +1,12 @@
+# --- !Ups
+CREATE TABLE `user` (
+  id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(25) UNIQUE NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password TINYBLOB NOT NULL,
+  salt TINYBLOB NOT NULL,
+  CONSTRAINT pk_user PRIMARY KEY (id)
+);
+
+# --- !Downs
+DROP TABLE `user`;

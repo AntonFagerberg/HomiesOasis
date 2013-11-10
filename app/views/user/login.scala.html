@@ -1,3 +1,7 @@
+@(form: Form[(Either[String, String], String)])
+
+@import helper.twitterBootstrap._
+
 @main(Some("Sign in"), List("css/user/login.min.css")) {
     <div class="container">
         <div class="panel panel-default panel-login">
@@ -5,15 +9,30 @@
                 <h2 class="panel-title">Sign in to your account</h2>
             </div>
             <div class="panel-body">
-                <form>
-                    <input type="text" class="form-control" placeholder="E-mail address" autofocus>
-                    <input type="password" class="form-control" placeholder="Password">
+                @helper.form(routes.User.authenticate()) {
+                    <div class="form-group @if(form.hasErrors){has-error}">
+                        <input
+                            type="text"
+                            name="usernameOrEmail"
+                            class="form-control"
+                            placeholder="Username or E-mail address"
+                            value="@form("usernameOrEmail").value"
+                            @if(!form.hasErrors || form("usernameOrEmail").hasErrors){autofocus}
+                        >
+                        <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Password"
+                            @if(!form("usernameOrEmail").hasErrors && form("password").hasErrors){autofocus}
+                        >
+                    </div>
                     <label class="checkbox">
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     <a href="@routes.User.register" class="btn btn-success btn-block">Set up a new account</a>
-                </form>
+                }
             </div>
         </div>
     </div>

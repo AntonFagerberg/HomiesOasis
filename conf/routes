@@ -3,8 +3,11 @@
 # ~~~~
 
 # Home page
-GET         /                   controllers.User.login
-GET         /register           controllers.User.register
+GET         /                    controllers.User.login
+POST        /                    controllers.User.authenticate
+GET         /register            controllers.User.register
+POST        /register            controllers.User.createAccount
+GET         /settings            controllers.User.settings
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file        controllers.Assets.at(path="/public", file)

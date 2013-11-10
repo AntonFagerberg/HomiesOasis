@@ -1,3 +1,5 @@
+@(form: Form[(User, String)])
+
 @main(Some("Register"), List("css/user/register.min.css")) {
     <div class="container">
         <div class="panel panel-default panel-register">
@@ -5,13 +7,43 @@
                 <h2 class="panel-title">Set-up new account</h2>
             </div>
             <div class="panel-body">
-                <form>
-                    <input type="text" class="form-control" placeholder="Nickname" autofocus>
-                    <input type="text" class="form-control" placeholder="E-mail address">
-                    <input type="password" class="form-control" placeholder="Password">
+                @helper.form(routes.User.createAccount) {
+                    <div class="form-group @if(form("user.username").hasErrors){has-error}">
+                        <input
+                            value="@form("user.username").value"
+                            name="user.username"
+                            type="text"
+                            class="form-control"
+                            placeholder="Username"
+                            @if(!form.hasErrors || form("user.username").hasErrors){autofocus}
+                        >
+                    </div>
+                    <div class="form-group @if(form("user.email").hasErrors){has-error}">
+                        <input
+                            value="@form("user.email").value"
+                            name="user.email"
+                            type="text"
+                            class="form-control"
+                            placeholder="E-mail address"
+                            @if(!form("user.username").hasErrors && form("user.email").hasErrors){autofocus}
+                        >
+                    </div>
+                    <div class="form-group @if(form("password").hasErrors){has-error}">
+                        @if(form("password").hasErrors){
+                            <label class="control-label" for="password">Password must be at least 6 characters:</label>
+                        }
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Password"
+                            @if(!form("user.username").hasErrors && !form("user.email").hasErrors && form("password").hasErrors){autofocus}
+                        >
+                    </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Create account</button>
                     <a href="@routes.User.login" class="btn btn-danger btn-block">Back to login</a>
-                </form>
+                }
             </div>
         </div>
     </div>
